@@ -2,7 +2,8 @@
   display: flex;
   justify-content: space-between;
   padding: 10px 20px;
-  background: linear-gradient(45deg, hsl(150, 87%, 41%), #06a5b9);
+  /* background: linear-gradient(45deg, hsl(150, 87%, 41%), #06a5b9); */
+  background: linear-gradient(45deg, hsl(150, 83%, 16%), #066446);
   /* z-index: 1000;  */
 }
 .header{
@@ -14,7 +15,7 @@
     font-size: 1.4rem;
     font-weight: bold;
     font-family: monospace;
-    background: #545455;
+    background: #bababd;
     -webkit-text-fill-color: transparent; 
     background-clip: text; 
     /* padding-right: 100px; */

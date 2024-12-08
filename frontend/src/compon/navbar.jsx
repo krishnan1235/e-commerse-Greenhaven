@@ -2,7 +2,7 @@
 // import { Button } from '@chakra-ui/react';
 import React, { useState } from 'react'
 import "../index.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CiSquarePlus } from "react-icons/ci";
 import { IoIosColorPalette } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
@@ -37,17 +37,7 @@ function Navbar() {
   {
     
   }
-  function showuserdetails()
-  {
-    const d=document.getElementsByClassName("side_bar_user");
-    for (let element of d) {
-      element.style.display = "flex";
-      element.style.opacity= "1";
-      element.style.transform=" translateX(0)";
-      element.style.pointerEvents= "auto";
-    }
-    
-  }
+
   function closeUserDetails()
   { 
     const d=document.getElementsByClassName("side_bar_user");
@@ -66,12 +56,31 @@ function Navbar() {
     const searchBar = document.getElementById("search_bar_id");
 
     if (toggleBar) {
-      searchBar.classList.remove("active"); // Hide the bar
+      searchBar.classList.remove("active"); // Hide
     } else {
-      searchBar.classList.add("active"); // Show the bar
+      searchBar.classList.add("active"); // Show 
     }
-    setToggleBar(!toggleBar); // Toggle state
+    setToggleBar(!toggleBar); 
   }
+   const [login,setlogin]=useState(false);
+   const navigate = useNavigate();
+
+   function userAuth() {
+    if (login) {
+     ls
+      const d = document.getElementsByClassName("side_bar_user");
+      for (let element of d) {
+        element.style.display = "flex";
+        element.style.opacity = "1";
+        element.style.transform = "translateX(0)";
+        element.style.pointerEvents = "auto";
+      }
+    } else {
+      // If not logged in, navigate to login page
+      navigate("/login");
+    }
+  }
+   
   return (
     <>
     <div className='side_bar_user'>
@@ -111,7 +120,7 @@ function Navbar() {
        {/* <button  onClick={ toggletheme} className='theme'><IoIosColorPalette /></button> */}
       
        <FaSearch onClick={toggleSearchBar}/>
-       <button className='user' onClick={showuserdetails}><FaUserCircle />
+       <button className='user' onClick={userAuth}><FaUserCircle />
        </button>
       </div>
     </div>

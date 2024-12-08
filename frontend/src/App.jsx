@@ -6,7 +6,7 @@ import React from "react";
 import Homepage from "./pages/Homepage";
 import Createpage from "./pages/Createpage";
 import Navbar from "./compon/navbar.jsx";
-
+import Login from "./pages/login.jsx"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AllProducts from './pages/AllProducts.jsx';
@@ -24,6 +24,7 @@ function App() {
                 <Route path="/" element={<Homepage />} />
                 <Route path="/create" element={<Createpage />} />
                 <Route path="/get" element={<AllProducts />} />
+                <Route path="/login" element={<Login />} /> 
             </Routes>
             <ToastContainer
               position="top-center"

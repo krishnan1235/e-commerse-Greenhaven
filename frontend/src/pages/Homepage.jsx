@@ -2,6 +2,7 @@ import { Container, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import "./styles/cstyle.css";
 import ProductCard from './productcard';
 import Carousel from "./carousel";
 import Catagories from './catagery';
@@ -33,7 +34,7 @@ function Homepage() {
     <Carousel/>
     </div>
     <div className='intro'>
-      <h>Plants</h>
+      <h2>Plants</h2>
       <p>Plants make for the best house companions, suitable for all your moods and every aesthetic. Ugaoo brings you the widest variety of plants to choose from so you can buy plants online from the comfort of your home!</p>
     </div>
 
