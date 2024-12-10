@@ -43,7 +43,7 @@ export const putProduct=async(req,res)=>
 export const getProduct=async(req,res)=>{
     try{
     const product= await Product.find();// {} means return all the data
-    console.log(product)
+    // console.log(product)
     res.status(201).json({
         success:true,
         data:product

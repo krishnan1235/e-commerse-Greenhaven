@@ -1,112 +1,98 @@
-.login_container{
+.signup_container{
     display: flex;
     justify-content: center;
-    /* margin: 50px;   */
+    /* margin: 50px; */
 }
-.form_container{
+.form_container_signup{
   text-align: center; 
   /* background-color:  rgb(238, 250, 246);  */
   padding: 20px;
   border-radius: 10px; 
-  /* box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2),-2px 4px 8px rgba(0, 0, 0, 0.2); */
-  width: 390px;
+  /* box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2),-2px 4px 8px rgba(0, 0, 0, 0.2);   */
+  width: 350px;
 }
-.login_heading{
+.signup_heading{
     font-size: 1.6rem;
     color: rgb(61, 61, 61);
     margin-bottom: 25px;
-    /* margin-right: 150px; */
     display: flex;
     flex-direction: row;
     font-family: sans-serif;
 }
-.login_form input {
+.signup_form input {
     display: block;
     width: 100%; 
     max-width: 300px;
     border:1px solid rgb(62, 69, 68);
     background-color: #ffffff;
-    margin-top: 20px; 
-    margin-bottom: 20px;
+    margin-bottom: 20px; 
+    margin-top: 10px;
     padding: 10px;
     color: rgb(91, 90, 90);
     font-size: 1rem;
     /* border: 1px solid #0f1d43; */
     border-radius: 3px;
   }
-  .button1{
+  .button2{
     background-color:#149253;
     width:50%;
-    margin-right: 50px;
-    margin-bottom: 20px;
     /* margin-left: 30px; */
     border-radius: 3px;
     color: white;
     /* height: 100%; */
     padding: 5px;
-    /* margin-bottom: 10px; */
+    margin-bottom: 10px;
   }
-  .button1:active{
+  .button2:active{
     opacity: 0.7;
 
   }
   
-  .login_form p{
+  .signup_form p{
     color: black;
-    margin-bottom: 20px;
   }
-.signup{
-  color: #149253;
-  font-size: 1.2rem;
-  margin: 4px;
-  /* text-decoration: dashed; */
-}
+
 @media (max-width: 608px) {
-  .form_container {
+  .form_container_signup {
       width: 90%;
       margin: 10px;
       padding: 15px;
   }
 
-  .login_heading {
+  .signup_heading {
       font-size: 1.4rem;
   }
 
-  .login_form input {
+  .signup_form input {
       width: 90%;
       max-width: 90%;
       font-size: 0.9rem;
   }
 
-  .button1 {
+  .button2 {
       width: 80%;
       font-size: 1rem;
   }
 
-  .signup {
-      font-size: 1rem;
-  }
+
 }
 
 @media (max-width: 480px) {
-  .form_container {
+  .form_container_signup {
       width: 95%;
       padding: 10px;
   }
 
-  .login_heading {
+  .signup_heading {
       font-size: 1.2rem;
   }
 
-  .login_form input {
+  .signup_form input {
       width: 95%;
   }
 
-  .button1 {
+  .button2 {
       width: 90%;
   }
 
-  .signup {
-      font-size: 0.9rem;
-  }
 }

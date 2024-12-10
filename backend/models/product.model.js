@@ -13,7 +13,7 @@ const productschema= new mongoose.Schema({
         type:String,
         required:true
     }
-},{timestamps:true} //it is for because of created as uptated at time will be shown
+},{timestamps:true} 
 );
 
 const Product = mongoose.model("e-commerse-website", productschema);

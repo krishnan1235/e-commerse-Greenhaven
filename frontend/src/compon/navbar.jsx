@@ -13,8 +13,7 @@ import { CiUser } from "react-icons/ci";
 import { IoMdAdd } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
-
-
+import { useLogin } from '../logincontext';
 
 function Navbar() {
   const [toggle,settoogle]=useState(0);
@@ -62,12 +61,12 @@ function Navbar() {
     }
     setToggleBar(!toggleBar); 
   }
-   const [login,setlogin]=useState(false);
+   const {login}=useLogin();
+
    const navigate = useNavigate();
 
    function userAuth() {
-    if (login) {
-     ls
+    if (login==true) {
       const d = document.getElementsByClassName("side_bar_user");
       for (let element of d) {
         element.style.display = "flex";

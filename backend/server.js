@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import ProductRoutes from "./routes/product.routes.js"
 import cors from "cors"
+import AuthRoutes from "./routes/auth.routes.js"; 
 
 const app=express();
 app.use(cors({
@@ -17,6 +18,8 @@ const PORT=process.env.PORT
 //     res.send("ready t m")                                         
 // });                                                               
 app.use("/api/v1",ProductRoutes);
+app.use("/api/auth", AuthRoutes);
+
 
 
 app.listen(PORT,()=>{
