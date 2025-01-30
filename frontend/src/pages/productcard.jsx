@@ -1,5 +1,5 @@
 import React from 'react'
-
+import "./styles/productdetailsstyle.css";
 const ProductCard = ({products}) => {
     return(
         <div className="card">
@@ -7,6 +7,7 @@ const ProductCard = ({products}) => {
       <div className="card-content">
         <h3>{products.name}</h3>
         <p>₹{products.price}</p>
+        <button id="b2">ADD TO CART</button>  
       </div>
     </div>
         

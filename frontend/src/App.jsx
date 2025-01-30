@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import AllProducts from './pages/AllProducts.jsx';
 import Footer from './pages/footer.jsx';
 import { LoginProvider } from './logincontext.jsx'; 
+import Product_details from './pages/productdetails.jsx';
 function App() {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -34,6 +35,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/create" element={<Createpage />} />
+        <Route path="/product" element={<Product_details/>}/>
         <Route path="/get" element={<AllProducts />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

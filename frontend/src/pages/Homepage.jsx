@@ -1,15 +1,20 @@
 import { Container, SimpleGrid, Text, VStack } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "./styles/cstyle.css";
 import ProductCard from './productcard';
 import Carousel from "./carousel";
 import Catagories from './catagery';
+import Product_details from './productdetails';
 
 function Homepage() {
   // const [allData, setAllData] = useState([]);
+  const navigate = useNavigate();
 
+  const handleCardClick = (item) => {
+    navigate("/product", { state: item });
+  };
   const [pro,setpro]=useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -51,8 +56,14 @@ function Homepage() {
       ) : (
         <div className="grid-container">
           {pro.map((item, index) => (
-            <div key={index} className="card_container">
+            <div key={index}
+            className="card_container"
+            onClick={() => handleCardClick(item)}>
+              
+            
+               {/* key={index} to={`/product/${item.id}`}> */}
               <ProductCard products={item} />
+              
             </div>
           ))}
         </div>

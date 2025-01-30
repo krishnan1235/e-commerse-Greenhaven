@@ -1,3 +1,30 @@
-.lorem{
-    color: black;
+.lineer{
+width: 100%;
+height: 40px;
+background-color:rgb(1, 65, 26);
+}
+.footer_c{
+    display: flex;
+}
+.f_about,.f_contact,.f_customer{
+color: black;
+width: 100%;
+padding: 20px;
+margin: 10px;
+}
+.f_about p,.f_contact p,.f_customer p{
+    font-size: 20px;
+    font-family: sans-serif;
+    margin-bottom: 20px;
+    }
+ #ico{
+    display: flex;
+    margin: 20px;
+    justify-content: space-between;
+    width: 200px;
+ }   
+ @media (max-width: 700px) {
+    .footer_c{
+        display: inline;
+    }
 }
