@@ -1,6 +1,6 @@
 // import { Container } from '@chakra-ui/react'
 // import { Button } from '@chakra-ui/react';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../index.css";
 import { Link, useNavigate } from "react-router-dom";
 import { CiSquarePlus } from "react-icons/ci";
@@ -14,9 +14,18 @@ import { IoMdAdd } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { useLogin } from '../logincontext';
+import { FaCartShopping } from "react-icons/fa6";
+
 
 function Navbar() {
   const [toggle,settoogle]=useState(0);
+  // const [searchElement,setSearchElement]=useState("");
+  // useEffect(()=>{
+  //   localStorage.setItem("searchElement",searchElement);
+  // })
+  const handleSearch=()=>{
+
+  }
   function toggletheme()
   {
     if (toggle==0){
@@ -118,22 +127,22 @@ function Navbar() {
        {/* <button className='plus'><CiSquarePlus /></button>  */}
        {/* <button  onClick={ toggletheme} className='theme'><IoIosColorPalette /></button> */}
       
-       <FaSearch onClick={toggleSearchBar}/>
        <button className='user' onClick={userAuth}><FaUserCircle />
        </button>
+       <FaCartShopping />
       </div>
     </div>
 
-      <div className='search_bar' id="search_bar_id">
+      {/* <div className='search_bar' id="search_bar_id">
           <div className="input_text">
-            <input type="text" placeholder='search Plants' />
+            <input type="text" placeholder='search Plants' value={searchElement} onChange={(e)=> setSearchElement(e.target.value)} />
           </div>
         <div className='search_button'>
             <button ><FaSearch />
             </button>
         </div>
 
-      </div>
+      </div> */}
     </div>
     </>
   )

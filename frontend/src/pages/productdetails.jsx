@@ -29,7 +29,7 @@ const Product_details = () => {
             </div>
             <div className="ratings">
                 {stars.map((filled, index) => (
-                    <FaStar key={index} color={filled ? "yellow" : "gray"} />
+                    <FaStar key={index} color={filled ? "#FFD700" : "gray"} />
                 ))}
             <div>{logPrice.toFixed(2)}</div>
             </div>

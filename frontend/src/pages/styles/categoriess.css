@@ -3,6 +3,7 @@
     justify-content: space-around;
     flex-wrap: nowrap; 
     margin-top: 30px;
+    /* background-color: aliceblue; */
      margin-bottom: 40px;
     width: 100%;
     overflow-x: auto; 
@@ -118,4 +119,28 @@
 
 .categories::-webkit-scrollbar-track {
     background-color: #ffffff;
+}
+
+/* cat home page  */
+
+.cat_container{
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* text-align: center; */
+    margin-top:30px ;
+    /* align-items: center; */
+    /* background-color: #220f0f; */
+    /* justify-content: center; */
+}
+
+.cat_container p{
+      font-family: sans-serif;
+    color: #8f8d8d;
+    font-size: 1.15rem;
+    margin-left: 40px;
+    margin-right: 30px;
+  }
+.tit{
+    text-align: center;
+    margin-top: 30px;
 }

@@ -9,7 +9,11 @@ function Createpage() {
   const [newproduct,setnewproduct]=useState({
     name:"",
     price:"",
-    image:""
+    image:"",
+    brand:"",
+    category:"",
+    discription:"",
+    selling:""
   });
   function namehandler(e)
   {    
@@ -31,16 +35,47 @@ function Createpage() {
     });
   }
   
+  function sellpricehandler(e)
+  {
+    setnewproduct({
+      ...newproduct,selling:e.target.value
+    });
+  }
+
+  function dishandler(e)
+  {
+    setnewproduct({
+      ...newproduct,discription:e.target.value
+    });
+  }
+
+
+  function categoryhandler(e)
+  {
+    setnewproduct({
+      ...newproduct,category:e.target.value
+    });
+  }
+  function brandhandler(e)
+  {
+    setnewproduct({
+      ...newproduct,brand:e.target.value
+    });
+  }
 const {createProduct}=useProductStore();
 
 const handleAddProduct= async()=>{
 
+    try{
+
     const res = await axios.post("http://localhost:5000/api/v1/add", newproduct)
     if (res.data.success)
       toast.success("Added  product!")
-    else
-      toast.error("Error Adding")
-    setnewproduct({name:"",price:"",image:""})
+     }
+    catch{
+      toast.error("Please Provide all fields")
+    }
+    setnewproduct({name:"",price:"",image:"",brand:"",category:"",discription:"",selling:""})
 }
 
     
@@ -55,10 +90,35 @@ const handleAddProduct= async()=>{
       value={newproduct.name}
       onChange={(e)=> namehandler(e)}/>
 
+        <input 
+      type="text" 
+      placeholder="Brand Name" 
+      value={newproduct.brand}
+      onChange={(e)=> brandhandler(e)}/>
+
+      <input 
+      type="text" 
+      placeholder="Category" 
+      value={newproduct.category}
+      onChange={(e)=> categoryhandler(e)}/>
+
+
+
+       <input 
+      type="text" 
+      placeholder="Discription" 
+      value={newproduct.discription}
+      onChange={(e)=> dishandler(e)}/>
+
       <input type="number"
       placeholder="Price" 
       value={newproduct.price}
       onChange={(e)=> pricehandler(e)}/>
+
+       <input type="number"
+      placeholder="Selling Price" 
+      value={newproduct.selling}
+      onChange={(e)=> sellpricehandler(e)}/>
 
       <input type="text" 
       placeholder="Image URL" 

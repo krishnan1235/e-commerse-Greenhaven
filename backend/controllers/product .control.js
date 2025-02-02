@@ -5,9 +5,9 @@ export const postProduct=async(req,res)=>
 {     
     try {                                                              
     const product=req.body;  // user will send the data          
-    if(!product.name||!product.price||!product.image)
+    if(!product.name||!product.price||!product.image||!product.selling||!product.brand||!product.category||!product.discription)
     {
-        return res.status(400).json({success:false,message:"provide all fields"});
+        res.status(400).json({success:false,message:"provide all fields"});
     }
     const newproduct=new Product(product);
     

@@ -13,6 +13,8 @@ import AllProducts from './pages/AllProducts.jsx';
 import Footer from './pages/footer.jsx';
 import { LoginProvider } from './logincontext.jsx'; 
 import Product_details from './pages/productdetails.jsx';
+import CatPage from "./pages/catalist.jsx";
+
 function App() {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -39,6 +41,8 @@ function App() {
         <Route path="/get" element={<AllProducts />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/catlist" element={<CatPage />} />
+        
       </Routes>
       <ToastContainer
         position="top-center"
