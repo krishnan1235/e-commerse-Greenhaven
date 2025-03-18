@@ -4,16 +4,20 @@ import { Routes, Route } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Homepage from "./pages/Homepage";
 import Createpage from "./pages/Createpage";
+import Adminpage from './adminpage.jsx';
 import Navbar from "./compon/navbar.jsx";
 import Login from "./pages/login.jsx";
 import Signup from './pages/signup.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AllProducts from './pages/AllProducts.jsx';
+import Profile from './pages/profile.jsx';
 import Footer from './pages/footer.jsx';
 import { LoginProvider } from './logincontext.jsx'; 
+import {EmailProvider} from './emailcontext.jsx'
 import Product_details from './pages/productdetails.jsx';
 import CatPage from "./pages/catalist.jsx";
+import Cart from "./pages/cart.jsx";
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
@@ -32,6 +36,7 @@ function App() {
   return (
     <Box minH={"100vh"}>
     <LoginProvider>
+    <EmailProvider>
 
       <Navbar />
       <Routes>
@@ -39,8 +44,11 @@ function App() {
         <Route path="/create" element={<Createpage />} />
         <Route path="/product" element={<Product_details/>}/>
         <Route path="/get" element={<AllProducts />} />
+        <Route path="/admin" element ={<Adminpage/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/profile" element={<Profile/>}/>
         <Route path="/catlist" element={<CatPage />} />
         
       </Routes>
@@ -64,6 +72,7 @@ function App() {
         }}
         />  
       <Footer />
+        </EmailProvider>
         </LoginProvider>
     </Box>
   );

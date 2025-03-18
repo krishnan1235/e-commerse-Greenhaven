@@ -2,6 +2,7 @@
 // import { Button } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react'
 import "../index.css";
+import { useEmail} from "../emailcontext";
 import { Link, useNavigate } from "react-router-dom";
 import { CiSquarePlus } from "react-icons/ci";
 import { IoIosColorPalette } from "react-icons/io";
@@ -14,11 +15,13 @@ import { IoMdAdd } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { useLogin } from '../logincontext';
+// import {useEmail} from "../emailcontext";
 import { FaCartShopping } from "react-icons/fa6";
 
 
 function Navbar() {
   const [toggle,settoogle]=useState(0);
+     const { email } = useEmail();
   // const [searchElement,setSearchElement]=useState("");
   // useEffect(()=>{
   //   localStorage.setItem("searchElement",searchElement);
@@ -70,23 +73,37 @@ function Navbar() {
     }
     setToggleBar(!toggleBar); 
   }
-   const {login}=useLogin();
-
+   const {login,setLogin}=useLogin();
+  const {setemail}=useEmail();
    const navigate = useNavigate();
 
    function userAuth() {
     if (login==true) {
       const d = document.getElementsByClassName("side_bar_user");
+      if (email=="admin@green.com")
+      {
+        navigate("/admin");
+      }
+      else{
       for (let element of d) {
         element.style.display = "flex";
         element.style.opacity = "1";
         element.style.transform = "translateX(0)";
         element.style.pointerEvents = "auto";
       }
+    }
     } else {
       // If not logged in, navigate to login page
       navigate("/login");
     }
+  }
+  
+  function logoutfunctionality()
+  {
+    setLogin(false);
+    closeUserDetails();
+    setemail("");
+    window.location.reload();
   }
    
   return (
@@ -110,7 +127,7 @@ function Navbar() {
       </div>
       <div className='user_details'>
           <IoLogOutOutline /> 
-            <p onClick={closeUserDetails}>Logout </p>
+            <p onClick={logoutfunctionality}>Logout </p>
       </div>
      
     </div>
@@ -129,7 +146,7 @@ function Navbar() {
       
        <button className='user' onClick={userAuth}><FaUserCircle />
        </button>
-       <FaCartShopping />
+       <Link to={'/cart'}><FaCartShopping /></Link>
       </div>
     </div>
 

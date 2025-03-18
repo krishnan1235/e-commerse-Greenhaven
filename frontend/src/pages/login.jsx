@@ -6,22 +6,26 @@ import "./styles/login_style.css";
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useLogin } from '../logincontext.jsx';
+import {useEmail} from "../emailcontext.jsx"
 
 function Login() {
-  const [email, setemail] = useState('');
+  const [emaili, setemaili] = useState('');
   const [password, setpassword] = useState('');
   const {setLogin}=useLogin();
-
+  const {setemail}=useEmail();
   const navigate=useNavigate();
 
     const handleSubmit = (e) => {
       e.preventDefault();
+      console.log(emaili);
 
-      axios.post("http://localhost:5000/api/auth/login", { email, password })
+      axios.post("http://localhost:5000/api/auth/login", { email: emaili, password })
+
         .then(response => {
          
           console.log(response.data);
           setLogin(true);
+          setemail(emaili);
           navigate("/"); 
         })
         .catch(error => {
@@ -48,8 +52,8 @@ function Login() {
         <input 
         type="email" 
         placeholder="Email" 
-        value={email}
-        onChange={(e)=>setemail(e.target.value)}
+        value={emaili}
+        onChange={(e)=>setemaili(e.target.value)}
         />
 
         <input type="password"
@@ -73,4 +77,4 @@ function Login() {
   );
 }
 
-export default Login
+export default Login;

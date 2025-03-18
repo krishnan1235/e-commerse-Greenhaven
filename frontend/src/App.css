@@ -1,8 +1,12 @@
 body {
      background-color: rgb(255, 255, 255);
      transition: all 1s ease-in-out; 
+   
  }
-
+.bdy select {
+    pointer-events: none;
+    opacity: 0.5; /* Makes it look disabled */
+}
 .custom-toast-container {
     margin-top: 50px;
     width: 300px;

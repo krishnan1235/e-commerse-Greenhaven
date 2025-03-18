@@ -73,6 +73,7 @@ cursor: pointer;
   border-radius: 20px;
   padding: 20px;
   position: relative;
+
   opacity: 0; 
   transform: translateY(-20px); 
   z-index: 0;
@@ -126,9 +127,11 @@ cursor: pointer;
   right: 3px;
   top: 60px;
   padding-bottom: 50px;
+  cursor: pointer;
   border-radius: 10px;
   padding-top: 10px;
-  pointer-events: none; 
+  pointer-events: none;
+  /* pointer-events: ;  */
   opacity: 0; 
   transform: translateX(100%); 
   transition: opacity 0.5s ease, transform 0.5s ease; 

@@ -23,7 +23,7 @@ const ProductCard = ({products}) => {
         
                           
                           </div>
-        <button id="b2">ADD TO CART</button>  
+        <button id="b2">VIEW MORE</button>  
       </div>
     </div>
         
