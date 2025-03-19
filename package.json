@@ -13,6 +13,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "e-commerse-website": "file:",
     "express": "^4.21.1",
     "mongoose": "^8.8.2",
     "react-slick": "^0.30.2",
