@@ -1,5 +1,4 @@
-import { Container, SimpleGrid, Text, VStack } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from './productcard';
