@@ -7,7 +7,7 @@ import ProductCard from './productcard';
 import "./styles/cstyle.css";
 import Carousel from "./carousel";
 import Catagories from './catagery';
-
+// 122
 function CatPage() {
   const location = useLocation();
   const { category } = location.state || {};
