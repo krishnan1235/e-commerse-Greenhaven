@@ -1,74 +1,64 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useEmail} from "../emailcontext";
-import "./styles/cartpage.css"; 
+import { useEmail } from "../emailcontext";
+import "./styles/cartpage.css";
 import { toast } from 'react-toastify';
+
 const Cart = () => {
     const { email } = useEmail();
-    // const [quantity,setquantity]=useState(0);
     const [cartItems, setCartItems] = useState([]);
     
     useEffect(() => {
         if (email) {
-            axios.get(`http://localhost:5000/api/cart/${email}`)
-                .then(response => setCartItems(response.data))
-                .catch(error => console.error("Error fetching cart:", error));
+            fetchCartItems();
         }
     }, [email]);
 
-    // if (email) {
-    //     axios.get(`http://localhost:5000/api/cart/${email}`)
-    //         .then(response => setCartItems(response.data))
-    //         .catch(error => console.error("Error fetching cart:", error));
-    // }
-    const addquantity = async (item) => {
-        const response = await axios.post("http://localhost:5000/api/cart/add", {
-            email: email,
-            name:item.name
-        });
-        if (email) {
-            axios.get(`http://localhost:5000/api/cart/${email}`)
-                .then(response => setCartItems(response.data))
-                .catch(error => console.error("Error fetching cart:", error));
+    const fetchCartItems = async () => {
+        try {
+            const response = await axios.get(`http://localhost:5000/api/cart/${email}`);
+            setCartItems(response.data);
+        } catch (error) {
+            console.error("Error fetching cart:", error);
         }
-            // console.log("Response:", response.data);
-    
+    };
+
+    const addQuantity = async (item) => {
+        try {
+            const response = await axios.post("http://localhost:5000/api/cart/add", {
+                email: email,
+                name: item.name
+            });
             if (response.data.success) {
                 toast.success("Added Successfully!");
+                fetchCartItems();
             } else {
                 toast.error("Failed to add");
             }
-    }
+        } catch (error) {
+            console.error("Error adding quantity:", error);
+        }
+    };
 
-    const subquantity = async (item) => {
-        if (item.quantity >1) {  // Ensure quantity is greater than 0
-            try {
-                const response = await axios.patch("http://localhost:5000/api/cart/update", {
+    const subQuantity = async (item) => {
+        try {
+            if (item.quantity > 1) {
+                await axios.patch("http://localhost:5000/api/cart/update", {
                     email: email,
-                    name:item.name
+                    name: item.name
                 });
-                // console.log("Updated quantity:", response.data);
-            } catch (error) {
-                console.error("Error updating quantity:", error);
+            } else {
+                await axios.delete(`http://localhost:5000/api/cart/${email}/${item._id}`);
+                toast.success("Removed Successfully!");
             }
-        } else {
-           const respone = await axios.delete(`http://localhost:5000/api/cart/${email}/${item._id}`)
-           toast.success("Removed Successfully!");
+            fetchCartItems();
+        } catch (error) {
+            console.error("Error updating quantity:", error);
         }
-        
-        if (email) {
-            axios.get(`http://localhost:5000/api/cart/${email}`)
-                .then(response => setCartItems(response.data))
-                .catch(error => console.error("Error fetching cart:", error));
-        }
-            
-        
-    
-      
-        }
-        
-    
-   
+    };
+
+    const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+    const totalPrice = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
 
     return (
         <div className="cart_container">
@@ -76,30 +66,29 @@ const Cart = () => {
             {cartItems.length === 0 ? (
                 <p>Cart is empty</p>
             ) : (
-                <div className="listi">
-                    {cartItems.map((item, index) => (
-                        <div className="cart_card" key={index}>
-                            <img src={item.image} alt={item.name}  />
-                            <div className="cart_content">
-                                <div>
-
-                                    <h2>{item.name} </h2>
-                                    <p> Price <del>{item.selling} </del>₹{item.price} </p>
-                                 </div>
-                                 <div className="quantity">
-                                        <div id="add" onClick={() => addquantity(item)}>
-                                            +
-                                        </div>
+                <div>
+                    <div className="listi">
+                        {cartItems.map((item, index) => (
+                            <div className="cart_card" key={index}>
+                                <img src={item.image} alt={item.name} />
+                                <div className="cart_content">
+                                    <div>
+                                        <h2>{item.name}</h2>
+                                        <p>Price <del>{item.selling}</del> ₹{item.price}</p>
+                                    </div>
+                                    <div className="quantity">
+                                        <div id="add" onClick={() => addQuantity(item)}>+</div>
                                         <p id="qty">{item.quantity}</p>
-                                        <div id="sub" onClick={() => subquantity(item)}>
-                                            -
-                                        </div>
+                                        <div id="sub" onClick={() => subQuantity(item)}>-</div>
                                     </div>
                                 </div>  
-                            {/* <p>lo</p> */}
-                        </div>
-                    ))}
-        
+                            </div>
+                        ))}
+                    </div>
+                    <div className="total_info">
+                        <h3>Total Quantity: {totalQuantity}</h3>
+                        <h3>Total Price: ₹{totalPrice}</h3>
+                    </div>
                 </div>
             )}
         </div>

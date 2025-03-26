@@ -1,5 +1,4 @@
 import Product from "../models/product.model.js";
-import express from "express";
 
 export const postProduct=async(req,res)=>                  
 {     
