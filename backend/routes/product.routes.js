@@ -2,13 +2,20 @@ import { deleteProduct, getProduct, postProduct, putProduct } from "../controlle
 import Product from "../models/product.model.js";
 import express from "express";
 
-const router=express.Router();
+const router = express.Router();
 
-router.post("/add",postProduct);
+// Route to add a new product
+router.post("/add", postProduct);
 
-router.put("/:id", putProduct);
+// Route to update a product
+router.put("/update/:id", putProduct);
 
-router.get("/get",getProduct);
 
-router.delete("/:id",deleteProduct);
+// Route to get all products
+router.get("/get", getProduct);
+
+// Route to delete a product
+router.delete("/delete/:id", deleteProduct);
+
+
 export default router;
