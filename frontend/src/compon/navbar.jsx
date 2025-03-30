@@ -104,6 +104,7 @@ function Navbar() {
     closeUserDetails();
     setemail("");
     window.location.reload();
+    alert("Logged Out Successfully");
   }
    
   return (
@@ -114,7 +115,8 @@ function Navbar() {
       </div>
       <div className='user_details'>       
           <CiUser /> 
-          <p onClick={closeUserDetails}> My Profile</p>
+          <Link to={"/"}>
+          <p onClick={closeUserDetails}> My Profile</p></Link>
       </div >
       <div className='user_details'>
         <TiShoppingCart />
