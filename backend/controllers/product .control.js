@@ -6,7 +6,7 @@ export const postProduct = async (req, res) => {
     const product = req.body;
 
     // Check if all required fields are provided
-    const requiredFields = ['name', 'price', 'image', 'selling', 'brand', 'category', 'description'];
+    const requiredFields = ['name', 'price', 'image', 'selling', 'brand', 'category', 'discription'];
     for (let field of requiredFields) {
       if (!product[field]) {
         return res.status(400).json({ success: false, message: `Please provide all fields. Missing: ${field}` });

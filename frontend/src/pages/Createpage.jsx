@@ -12,7 +12,7 @@ function Createpage() {
     image: "",
     brand: "",
     category: "",
-    description: "",
+    discription: "",
     selling: "",
   });
   const [editingId, setEditingId] = useState(null);
@@ -74,7 +74,7 @@ function Createpage() {
         image: "",
         brand: "",
         category: "",
-        description: "",
+        discription: "",
         selling: "",
       });
 
@@ -112,7 +112,7 @@ function Createpage() {
           <input type="text" name="name" placeholder="Product Name" value={newproduct.name} onChange={handleChange} />
           <input type="text" name="brand" placeholder="Brand Name" value={newproduct.brand} onChange={handleChange} />
           <input type="text" name="category" placeholder="Category" value={newproduct.category} onChange={handleChange} />
-          <input type="text" name="description" placeholder="Description" value={newproduct.description} onChange={handleChange} />
+          <input type="text" name="discription" placeholder="Description" value={newproduct.discription} onChange={handleChange} />
           <input type="number" name="price" placeholder="Price" value={newproduct.price || ""} onChange={handleChange} />
           <input type="number" name="selling" placeholder="Selling Price" value={newproduct.selling || ""} onChange={handleChange} />
           <input type="text" name="image" placeholder="Image URL" value={newproduct.image} onChange={handleChange} />
