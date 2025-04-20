@@ -1,0 +1,44 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Build artifacts
+dist/
+build/
+
+# Editor/IDE folders
+.vscode/
+.idea/
+
+# Optional npm cache directory
+.npm/
+
+# Debug files
+*.pid
+*.seed
+*.pid.lock
+
+# MongoDB database files (if using local DB)
+dump/
+*.mongodb
+
+# Others
+*.tgz
