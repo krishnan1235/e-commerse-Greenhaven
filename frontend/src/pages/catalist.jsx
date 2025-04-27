@@ -19,7 +19,7 @@ const navigate = useNavigate();
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const res = await axios.get("http://localhost:5000/api/v1/get");
+          const res = await axios.get("https://e-commerse-greenhaven.onrender.com/api/v1/get");
           setPro(res.data.data);
         } catch (error) {
           console.error("Error fetching data:", error);

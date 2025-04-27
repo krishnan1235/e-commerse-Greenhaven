@@ -25,7 +25,7 @@ const Product_details = () => {
         try {
             // console.log("Sending request:", { email: email, name, price, image });
     
-            const response = await axios.post("http://localhost:5000/api/cart/add", {
+            const response = await axios.post("https://e-commerse-greenhaven.onrender.com/api/cart/add", {
                 email: email,
                 name,
                 price,
