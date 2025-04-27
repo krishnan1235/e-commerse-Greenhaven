@@ -11,7 +11,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://greenhaven-liart.vercel.app",
 }));
 
 app.use(express.json()); // Allows us to accept JSON data in req.body
