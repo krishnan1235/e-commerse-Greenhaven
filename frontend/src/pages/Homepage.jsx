@@ -57,7 +57,6 @@ function Homepage() {
 
   return (
     <>
-      {/* 🔵 If still loading */}
       {loading || pro.length === 0 ? (
         <div className="loading-container">
           <div className="loader"></div> {/* You can customize this spinner */}

@@ -105,7 +105,7 @@ function Navbar() {
         </div>
         <div className='user_details'>
           <CiUser />
-          <Link to={"/"}>
+          <Link to={"/profile"}>
             <p onClick={closeUserDetails}> My Profile</p></Link>
         </div >
         <div className='user_details'>

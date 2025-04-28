@@ -47,3 +47,90 @@ body {
   color: rgb(80, 80, 80);
 
 }
+
+
+/* profile****************************************************PPPPPPPPPPPPPPPPP(*************************0 */
+.profile-container {
+  padding: 40px;
+  min-height: 100vh;
+  background: #e8f5e9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-title {
+  font-size: 2.5rem;
+  color: #2e7d32;
+  margin-bottom: 20px;
+}
+
+.profile-card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+.profile-info p {
+  font-size: 1.1rem;
+  margin: 10px 0;
+  color: #555;
+}
+
+.input-field {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.edit-btn, .logout-btn, .save-btn, .cancel-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.logout-btn {
+  background-color: #e53935;
+  color: white;
+}
+
+.save-btn {
+  background-color: #43a047;
+  color: white;
+}
+
+.cancel-btn {
+  background-color: gray;
+  color: white;
+}
+
+.edit-btn:hover, .save-btn:hover {
+  background-color: #388e3c;
+}
+
+.logout-btn:hover {
+  background-color: #c62828;
+}
+
+.cancel-btn:hover {
+  background-color: #757575;
+}
