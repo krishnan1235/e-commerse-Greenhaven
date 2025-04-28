@@ -2,7 +2,9 @@ import './App.css';
 import { Box } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import Homepage from "./pages/Homepage";
+// import Homepage from "./pages/Homepage";
+import Homepage from './pages/Homepage.jsx';
+
 import Createpage from "./pages/Createpage";
 import Adminpage from './adminpage.jsx';
 import Navbar from "./compon/navbar.jsx";

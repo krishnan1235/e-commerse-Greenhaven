@@ -1,113 +1,88 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+ // You can create this CSS file.
 
 const Profile = () => {
   const [user, setUser] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    address: ''
+    name: "",
+    email: "",
+    address: ""
   });
-
   const [isEditing, setIsEditing] = useState(false);
-  const [editedUser, setEditedUser] = useState({ ...user });
 
   useEffect(() => {
-    // Normally fetch user data from API/localStorage
-    const storedUser = {
-      name: "Krishnan",
-      email: "krishnan@example.com",
-      phone: "+91 9876543210",
-      address: "Coimbatore, Tamil Nadu, India"
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get("https://e-commerse-greenhaven.onrender.com/api/auth/getUser", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}` // Assuming you save token at login
+          }
+        });
+        setUser(res.data.user);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
     };
-    setUser(storedUser);
-    setEditedUser(storedUser);
+    fetchUser();
   }, []);
 
-  const handleEditToggle = () => {
-    setIsEditing(!isEditing);
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setEditedUser(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSave = () => {
-    setUser(editedUser);
-    setIsEditing(false);
-    // You can also send updated user info to your backend here using axios.post()
-    alert("Profile updated successfully!");
-  };
-
-  const handleLogout = () => {
-    localStorage.clear();
-    window.location.reload();
+  const handleSave = async () => {
+    try {
+      await axios.put("https://e-commerse-greenhaven.onrender.com/api/auth/updateUser", user, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+      setIsEditing(false);
+      alert("Profile updated successfully ✅");
+    } catch (error) {
+      console.error("Error updating user:", error);
+      alert("Failed to update ❌");
+    }
   };
 
   return (
     <div className="profile-container">
-      <h1 className="profile-title">My Profile</h1>
-      <div className="profile-card">
-        <div className="profile-info">
-          {isEditing ? (
-            <>
-              <input
-                type="text"
-                name="name"
-                value={editedUser.name}
-                onChange={handleInputChange}
-                placeholder="Enter Name"
-                className="input-field"
-              />
-              <input
-                type="email"
-                name="email"
-                value={editedUser.email}
-                onChange={handleInputChange}
-                placeholder="Enter Email"
-                className="input-field"
-              />
-              <input
-                type="text"
-                name="phone"
-                value={editedUser.phone}
-                onChange={handleInputChange}
-                placeholder="Enter Phone"
-                className="input-field"
-              />
-              <input
-                type="text"
-                name="address"
-                value={editedUser.address}
-                onChange={handleInputChange}
-                placeholder="Enter Address"
-                className="input-field"
-              />
-            </>
-          ) : (
-            <>
-              <p><strong>Name:</strong> {user.name}</p>
-              <p><strong>Email:</strong> {user.email}</p>
-              <p><strong>Phone:</strong> {user.phone}</p>
-              <p><strong>Address:</strong> {user.address}</p>
-            </>
-          )}
-        </div>
-
-        <div className="profile-actions">
-          {isEditing ? (
-            <>
-              <button className="save-btn" onClick={handleSave}>Save</button>
-              <button className="cancel-btn" onClick={handleEditToggle}>Cancel</button>
-            </>
-          ) : (
-            <>
-              <button className="edit-btn" onClick={handleEditToggle}>Edit Profile</button>
-              <button className="logout-btn" onClick={handleLogout}>Logout</button>
-            </>
-          )}
-        </div>
+      <h2>Profile</h2>
+      <div className="profile-field">
+        <label>Name:</label>
+        <input 
+          type="text" 
+          name="name"
+          value={user.name} 
+          onChange={handleChange} 
+          disabled={!isEditing}
+        />
       </div>
+      <div className="profile-field">
+        <label>Email:</label>
+        <input 
+          type="email" 
+          name="email"
+          value={user.email} 
+          onChange={handleChange} 
+          disabled
+        />
+      </div>
+      <div className="profile-field">
+        <label>Address:</label>
+        <input 
+          type="text" 
+          name="address"
+          value={user.address} 
+          onChange={handleChange} 
+          disabled={!isEditing}
+        />
+      </div>
+      {isEditing ? (
+        <button className="save-button" onClick={handleSave}>Save</button>
+      ) : (
+        <button className="edit-button" onClick={() => setIsEditing(true)}>Edit</button>
+      )}
     </div>
   );
 };
