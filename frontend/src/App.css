@@ -8,7 +8,7 @@ body {
     opacity: 0.5; /* Makes it look disabled */
 }
 .custom-toast-container {
-    margin-top: 50px;
+    margin-top: 80px;
     width: 300px;
     background-color: aqua\; 
   }
@@ -17,6 +17,7 @@ body {
     .custom-toast-container {
       margin-top: 20px; 
       width: 80%; 
+      z-index: 100000;
       font-size: 14px; 
     }
   }
@@ -50,42 +51,406 @@ body {
 
 
 /* profile****************************************************PPPPPPPPPPPPPPPPP(*************************0 */
-.profile-container {
-  max-width: 400px;
-  margin: 30px auto;
+.profile-wrapper {
+  display: flex;
+  flex-direction: column; /* Ensures mobile stacking */
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  background-color: #fff;
+  background-color: #f5f5f5;
+  min-height: 100vh; /* Fixed full-height */
+}
+ 
+.sidebar {
+  width: 100%; /* Full width on mobile */
+  background-color: #1c4b35;
+  color: white;
+  padding: 20px;
+  border-radius: 30px;
+  margin: 20px 0; /* Simplified margin */
 }
 
-.profile-field {
+.sidebar .profile-pic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.sidebar .profile-pic .circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #1b8e77;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.sidebar h2 {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.sidebar p {
+  font-size: 14px;
+  color: #ecf0f1;
+}
+
+.sidebar-menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar-menu ul li {
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+/* .sidebar-menu ul li:hover {
+  /* text-decoration: underline; */
+/* }  */
+
+.profile-content {
+  width: 100%;
+  margin-left: 0; /* Reset for mobile */
+}
+
+.profile-content h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.profile-form {
+  background-color: white;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:10px;
+  width: 80%;
+
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.address-form{
+  grid-template-columns: repeat(2, 2fr);
+  display:grid;
+  gap:10px;
+  width: 80%;
+  /* flex-direction: column; */
+}
+.form-group {
   margin-bottom: 15px;
 }
 
-.profile-field label {
+.form-group label {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: black;
+  display: block;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  color: black; /* keep text black */
+  background-color: white; /* <-- ADD THIS */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+.gender-options {
+  display: flex;
+  gap: 10px;
+ 
+}
+
+.gender-options label {
+  font-size: 14px;
+}
+
+.save-button,.edit-button  {
+  padding: 10px 15px;
+  font-size: 16px;
+  width: 100px ;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.save-button {
+  background-color: #27ae60;
+  padding: 10px 15px;
+  width: 150px ;
+  color: white;
+}
+
+.save-button:hover {
+  background-color: #2ecc71;
+}
+
+.edit-button {
+  background-color: #f39c12;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #e67e22;
+}
+.proficons{
+  display: flex;
+  gap: 13px;
+  padding: 4px;
+
+}
+
+.sidebar-menu ul{
+  padding-left : 15px;
+}
+
+
+
+.sidebar {
+  width: 280px;
+  background: #3d7355;
+  height: fit-content;
+  padding: 20px;
+  border-right: 1px solid #dee2e6;
+}
+
+.profile-pic {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #007bff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin: 0 auto 10px;
+}
+
+.sidebar-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-menu li {
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.sidebar-menu li:hover {
+  background: #6da888;
+
+}
+
+.sidebar-menu li.active {
+   background: #6da888;
+  font-weight: bold;
+}
+
+.proficons {
+  display: flex;
+  align-items: center;
+}
+
+.profname {
+  margin-left: 10px;
+}
+
+
+
+/* Forms - Only fixed overflow issues */
+.profile-form,
+.address-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  box-sizing: border-box; /* Fixes padding overflow */
+  overflow: hidden; /* Contains child elements */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
 }
 
-.profile-field input {
+.form-group input {
   width: 100%;
   padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
-.edit-button, .save-button {
-  padding: 10px 20px;
-  border: none;
-  background-color: green;
+.gender-options {
+  display: flex;
+  gap: 15px;
+}
+
+.gender-options label {
+  display: flex;
+  align-items: center;
+  font-weight: normal;
+}
+
+.gender-options input {
+  width: auto;
+  margin-right: 5px;
+}
+
+.view-products {
+  padding: 10px 15px;
+  background: #519171;
   color: white;
-  border-radius: 8px;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  font-weight: bold;
+  font-size: 16px;
 }
 
-.save-button {
-  background-color: #007bff;
+.edit-button:hover, .update-password:hover, .view-products:hover {
+  background: #0056b3;
+}
+
+.no-orders {
+  text-align: center;
+  padding: 40px;
+  background: white;
+  color: black;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.no-orders p {
+  margin-bottom: 20px;
+}
+.password-form {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.password-form .form-group {
+  margin-bottom: 20px;
+}
+
+.password-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2d3748; /* Dark gray color for better visibility */
+}
+
+.password-form input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e2e8f0; /* Light gray border */
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.password-form input:focus {
+  border-color: #4299e1; /* Blue border on focus */
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+}
+
+.password-form .update-password {
+  width: 100%;
+  padding: 12px;
+  background-color: #4299e1; /* Vibrant blue */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.password-form .update-password:hover {
+  background-color: #3182ce; /* Darker blue on hover */
+}
+
+.password-form .update-password:active {
+  background-color: #2c5282; /* Even darker blue when clicked */
+}
+
+/* Add some visual feedback for password matching */
+.password-match-feedback {
+  margin-top: 5px;
+  font-size: 14px;
+  min-height: 20px;
+}
+
+.password-match-feedback.valid {
+  color: #38a169; /* Green for matching passwords */
+}
+
+.password-match-feedback.invalid {
+  color: #e53e3e; /* Red for non-matching passwords */
+}
+@media (min-width: 768px) {
+  .profile-wrapper {
+    flex-direction: row; /* Sidebar + content on desktop */
+  }
+  
+  /* .sidebar {
+    width: 250px;
+    margin: 40px;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+  }
+   */
+  .profile-content {
+    margin-left: 20px;
+  }
+  
+  .profile-form {
+    grid-template-columns: repeat(2, 1fr); /* Maintains your 2-column layout */
+  }
+  
+  .address-form {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px){
+  .sidebar {
+    width: 100%; /* Full width on mobile */
+    background-color: #1c4b35;
+    color: white;
+    padding: 20px;
+    border-radius: 30px;
+    margin: 20px 0; /* Simplified margin */
+  }
 }

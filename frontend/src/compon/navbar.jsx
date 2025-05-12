@@ -76,12 +76,7 @@ function Navbar() {
         navigate("/admin");
       }
       else {
-        for (let element of d) {
-          element.style.display = "flex";
-          element.style.opacity = "1";
-          element.style.transform = "translateX(0)";
-          element.style.pointerEvents = "auto";
-        }
+        navigate("/profile"); 
       }
     } else {
       // If not logged in, navigate to login page
@@ -99,30 +94,7 @@ function Navbar() {
 
   return (
     <>
-      <div className='side_bar_user'>
-        <div className="close">
-          <RxCross2 onClick={closeUserDetails} />
-        </div>
-        <div className='user_details'>
-          <CiUser />
-          <Link to={"/profile"}>
-            <p onClick={closeUserDetails}> My Profile</p></Link>
-        </div >
-        <div className='user_details'>
-          <TiShoppingCart />
-          <p onClick={closeUserDetails}>My Orders</p>
-        </div>
-        <div className='user_details'>
-          <IoMdAdd />
-          <Link to={"/create"}>
-            <p onClick={closeUserDetails}> Add My Products </p></Link>
-        </div>
-        <div className='user_details'>
-          <IoLogOutOutline />
-          <p onClick={logoutfunctionality}>Logout </p>
-        </div>
-
-      </div>
+     
       <div className='header'>
 
         <div className="navbar">

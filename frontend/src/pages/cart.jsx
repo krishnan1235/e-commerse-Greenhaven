@@ -16,6 +16,7 @@ const Cart = () => {
 
     const fetchCartItems = async () => {
         try {
+            // const response = await axios.get(`http://localhost:5000/api/cart/${email}`);
             const response = await axios.get(`https://e-commerse-greenhaven.onrender.com/api/cart/${email}`);
             setCartItems(response.data);
         } catch (error) {
@@ -26,6 +27,7 @@ const Cart = () => {
     const addQuantity = async (item) => {
         try {
             const response = await axios.post("https://e-commerse-greenhaven.onrender.com/api/cart/add", {
+            // const response = await axios.post("http://localhost:5000/api/cart/add", {
                 email: email,
                 name: item.name
             });
@@ -44,11 +46,13 @@ const Cart = () => {
         try {
             if (item.quantity > 1) {
                 await axios.patch("https://e-commerse-greenhaven.onrender.com/api/cart/update", {
+                // await axios.patch("http://localhost:5000/api/cart/update", {
                     email: email,
                     name: item.name
                 });
             } else {
                 await axios.delete(`https://e-commerse-greenhaven.onrender.com/api/cart/${email}/${item._id}`);
+                // await axios.delete(`http://localhost:5000/api/cart/${email}/${item._id}`);
                 toast.success("Removed Successfully!");
             }
             fetchCartItems();

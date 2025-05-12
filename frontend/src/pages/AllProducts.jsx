@@ -8,6 +8,7 @@ const AllProducts = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                // const res = await axios.get("http://localhost:5000/api/v1/get");
                 const res = await axios.get("https://e-commerse-greenhaven.onrender.com/api/v1/get");
                 console.log("Response Data:", res.data.data); // Log fetched data
                 setAllData(res.data.data); // Update the state

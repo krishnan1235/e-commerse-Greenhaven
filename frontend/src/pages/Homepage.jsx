@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+// import axios from 'axios';
 import axios from 'axios';
+
 import "./styles/cstyle.css";
 import { FaSearch } from "react-icons/fa";
 import ProductCard from './productcard';
@@ -21,6 +23,8 @@ function Homepage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // const res=await axios.get("http://localhost:5000/api/v1/get");
+     
         const res = await axios.get("https://e-commerse-greenhaven.onrender.com/api/v1/get");
         setPro(res.data.data);
       } catch (error) {
@@ -57,6 +61,7 @@ function Homepage() {
 
   return (
     <>
+      {/* 🔵 If still loading */}
       {loading || pro.length === 0 ? (
         <div className="loading-container">
           <div className="loader"></div> {/* You can customize this spinner */}

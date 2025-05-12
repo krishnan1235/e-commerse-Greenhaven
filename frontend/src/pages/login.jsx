@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import "./styles/cstyle.css"
-import { Button } from "../components/ui/button.jsx"
+import React, { useState } from 'react';
+import "./styles/cstyle.css";
+import { Button } from "../components/ui/button.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import "./styles/login_style.css";
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useLogin } from '../logincontext.jsx';
-import { useEmail } from "../emailcontext.jsx"
+import { useEmail } from "../emailcontext.jsx";
 
 function Login() {
   const [emaili, setemaili] = useState('');
@@ -17,31 +17,25 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(emaili);
+    
 
-    axios.post("https://e-commerse-greenhaven.onrender.com/api/auth/login", { email: emaili, password })
-
+    // axios.post("http://localhost:5000/api/auth/login", { email: emaili, password:password })
+      // For production, uncomment the following line:
+      axios.post("https://e-commerse-greenhaven.onrender.com/api/auth/login", { email: emaili, password })
       .then(response => {
-
-        console.log(response.data);
-        setLogin(true);
-        setemail(emaili);
-        navigate("/");
-        alert("Login Successfull");
+        if (response.status === 200) {
+       
+          setLogin(true); // Set login state in context
+          setemail(emaili); // Set email in context
+          navigate("/"); // Redirect to homepage or dashboard
+          toast.success("Login successful");
+        }
       })
       .catch(error => {
-
         console.error("Login error:", error);
         toast.warning("Invalid email or password");
       });
   };
-
-  // if (res.data.success)
-  //   toast.success("Added  product!")
-  // else
-  //   toast.error("Error Adding")
-  // setnewproduct({name:"",price:"",image:""})
-
 
   return (
     <div className="login_container">
@@ -56,14 +50,20 @@ function Login() {
             value={emaili}
             onChange={(e) => setemaili(e.target.value)}
           />
-
-          <input type="password"
+          
+          <input
+            type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setpassword(e.target.value)}
           />
-
-          <Button type="button" className="button1" colorscheme="blue" onClick={handleSubmit}>
+          
+          <Button
+            type="button"
+            className="button111"
+            colorscheme="blue"
+            onClick={handleSubmit}
+          >
             Login
           </Button>
 
@@ -72,9 +72,7 @@ function Login() {
 
         </form>
       </div>
-
     </div>
-
   );
 }
 

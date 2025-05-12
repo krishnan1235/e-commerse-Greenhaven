@@ -1,0 +1,70 @@
+/* Order Success Page Styling */
+.order-success-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('your-homepage-background-image-url.jpg') no-repeat center center fixed;
+    background-size: cover; /* Ensure the background covers the whole page */
+    padding: 20px;
+}
+
+.order-success-card {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white to see the background */
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.order-success-card h2 {
+    color: #28a745;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+.order-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.product-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.order-info {
+    text-align: left;
+    max-width: 400px;
+}
+
+.order-info h3 {
+    margin: 10px 0;
+    font-size: 1.3em;
+}
+
+.order-info p {
+    margin: 5px 0;
+}
+
+.go-home-button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+.go-home-button:hover {
+    background-color: #218838;
+}

@@ -21,6 +21,9 @@ import Product_details from './pages/productdetails.jsx';
 import CatPage from "./pages/catalist.jsx";
 import Cart from "./pages/cart.jsx";
 
+import OrderConfirmation from "./pages/OrderConfirmation.jsx";
+import OrderSuccess from "./pages/OrderSuccess.jsx";
+
 function App() {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -52,27 +55,36 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/catlist" element={<CatPage />} />
+
+
+
+<Route path="/order-confirmation" element={<OrderConfirmation />} />
+<Route path="/order-success" element={<OrderSuccess />} />
         
       </Routes>
       <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-        className="custom-toast-container"
-        style={{
-          marginTop: isMobile ? '60px' : '10px',
-          marginLeft:isMobile? '30px':'',
-          width: isMobile ? '80%' : '300px',      
-          fontSize: isMobile ? '14px' : '16px',   
-        }}
-        />  
+  position="top-center"
+  autoClose={2000}
+  hideProgressBar={false}
+  newestOnTop={false}
+  closeOnClick
+  rtl={false}
+  pauseOnFocusLoss
+  draggable
+  pauseOnHover
+  theme="dark"
+  className="custom-toast-container"
+  style={{
+    position: 'fixed', // 🔥 Makes it float above everything
+    top: isMobile ? '100px' : '70px', // 🔼 Increased top position
+    left: '50%',
+    transform: 'translateX(-50%)', // ✅ Perfect horizontal center
+    width: isMobile ? '80%' : '300px',
+    fontSize: isMobile ? '14px' : '16px',
+    zIndex: 99999 // 🧱 Ensure it's above navbars/modals etc
+  }}
+/>
+
       <Footer />
         </EmailProvider>
         </LoginProvider>

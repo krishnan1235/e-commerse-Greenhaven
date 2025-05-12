@@ -9,34 +9,34 @@ const Catagories= () => {
     <div className='categories' >
       <div className="_plants">
 
-     <Link to="/catlist" state={{ category: "Flower Plants" }}>
+     <Link to="/catlist" state={{ category: "flowers" }}>
       <img src="images/flower.webp" alt="flower plant" />
       <p>Flower Plants</p>
     </Link>
         
       </div>
       <div className="_plants">
-      <Link to="/catlist" state={{ category: "Air Purifying Plants" }}>
+      <Link to="/catlist" state={{ category: "airpurify" }}>
           <img src="images\airpurify.webp" alt="Air Purifying Plants" />
           <p>Air Purifying Plants</p>
           </Link>
       </div>
       <div className="_plants">
-      <Link to="/catlist" state={{ category: "Hanging Plants" }}>
+      <Link to="/catlist" state={{ category: "indoor" }}>
             <img src="images\hanging.webp" alt="Hanging Plants" />
             <p>Hanging Plants</p>
             </Link>
             
       </div>
       <div className="_plants">
-      <Link to="/catlist" state={{ category: "Low Maintenance Plants" }}>
+      <Link to="/catlist" state={{ category: "lowmaintenance" }}>
               <img src="images\lowmain.webp" alt="Low Maintenance Plants" />
               <p>Low Maintenance Plants</p>
               </Link>
               
       </div>
       <div className="_plants">
-      <Link to="/catlist" state={{ category: "Medicinal Plants" }}>
+      <Link to="/catlist" state={{ category: "medicional" }}>
             <img src="images\medic.webp" alt="Medicinal Plants"/>
             <p>Medicinal Plants</p>
             </Link>

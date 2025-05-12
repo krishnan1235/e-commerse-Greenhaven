@@ -5,29 +5,59 @@ export const postProduct = async (req, res) => {
   try {
     const product = req.body;
 
-    // Check if all required fields are provided
-    const requiredFields = ['name', 'price', 'image', 'selling', 'brand', 'category', 'discription'];
-    for (let field of requiredFields) {
-      if (!product[field]) {
-        return res.status(400).json({ success: false, message: `Please provide all fields. Missing: ${field}` });
-      }
+    // Required fields that match the schema
+    const requiredFields = [
+      'name', 'brand', 'category', 'description', 
+      'price', 'selling', 'image', 'stocks'
+    ];
+
+    // Check for missing fields
+    const missingFields = requiredFields.filter(field => !product[field]);
+    if (missingFields.length > 0) {
+      return res.status(400).json({
+        success: false,
+        message: `Missing required fields: ${missingFields.join(', ')}`
+      });
     }
 
-    // Create a new product instance
-    const newProduct = new Product(product);
+    // Type validation
+    if (typeof product.price !== 'number' || product.price < 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'Price must be a positive number'
+      });
+    }
 
-    // Save the new product to the database
+    if (typeof product.stocks !== 'number' || product.stocks < 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'Stocks must be a positive number'
+      });
+    }
+
+    // Create and save product
+    const newProduct = new Product({
+      ...product,
+      // Ensure proper types
+      price: Number(product.price),
+      stocks: Number(product.stocks),
+      selling: Boolean(product.selling)
+    });
+
     await newProduct.save();
 
-    // Return success response
     return res.status(201).json({
       success: true,
-      message: "Product added successfully!"
+      message: "Product added successfully!",
+      product: newProduct
     });
 
   } catch (error) {
-    console.error("Error occurred while adding product:", error.message);
-    return res.status(500).json({ success: false, message: 'Server error' });
+    console.error("Error adding product:", error);
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    });
   }
 };
 
@@ -60,16 +90,16 @@ export const putProduct = async (req, res) => {
 
 // Controller to get all products
 export const getProduct = async (req, res) => {
+
   try {
     // Fetch all products
     const products = await Product.find();
-
-    // Return success response with all products
+   
     return res.status(200).json({
       success: true,
       data: products
     });
-
+    
   } catch (error) {
     console.error("Error occurred while fetching products:", error.message);
     return res.status(500).json({ success: false, message: 'Server error' });
