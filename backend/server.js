@@ -30,7 +30,8 @@
     //     console.log(`Server started at http://localhost:${PORT}`);
     // });
     
-    
+import chatbotRoutes from "./routes/ai_routes/chatbot.routes.js";
+import diseaseRoutes from "./routes/ai_routes/disease.routes.js";
 import orderRoutes from './routes/order.routes.js';
 import express from "express";
 import dotenv from "dotenv";
@@ -48,7 +49,8 @@ const app = express();
 // const wishlistRoutes = require("./routes/wishlist");
 // Middlewares
 app.use(cors({
-    origin: "https://greenhaven-liart.vercel.app",
+    origin: " http://localhost:5173",
+    // origin: "https://greenhaven-liart.vercel.app",
     credentials: true,
 }));
 
@@ -65,6 +67,8 @@ app.use("/api/auth", AuthRoutes);
 app.use("/api/cart", CartRoutes);
 app.use("/api/wishlist", wishlistRoutes);
 
+app.use("/api/ai/chatbot", chatbotRoutes);
+app.use("/api/ai/disease", diseaseRoutes);
 
 // Add this with your other route imports
 app.use('/api/orders', orderRoutes);

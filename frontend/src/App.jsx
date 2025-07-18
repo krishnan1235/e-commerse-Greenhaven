@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 // import Homepage from "./pages/Homepage";
 import Homepage from './pages/Homepage.jsx';
-
+// import ChatBot from './pages/ChatBot.jsx';
 import Createpage from "./pages/Createpage";
 import Adminpage from './adminpage.jsx';
 import Navbar from "./compon/navbar.jsx";
@@ -23,6 +23,11 @@ import Cart from "./pages/cart.jsx";
 
 import OrderConfirmation from "./pages/OrderConfirmation.jsx";
 import OrderSuccess from "./pages/OrderSuccess.jsx";
+
+
+import PlantDiseasePredictor from './pages/PlantDiseasePredictor.jsx';
+
+
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
@@ -55,7 +60,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/catlist" element={<CatPage />} />
-
+        <Route path="/disease-predictor" element={<PlantDiseasePredictor />} />
 
 
 <Route path="/order-confirmation" element={<OrderConfirmation />} />

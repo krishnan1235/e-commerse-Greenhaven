@@ -26,8 +26,8 @@ const OrderConfirmation = () => {
                 createdAt: new Date(),
             };
 
-            const response = await axios.post("https://e-commerse-greenhaven.onrender.com/api/orders/place", order);
-            // const response = await axios.post("http://localhost:5000/api/orders/place", order);
+            // const response = await axios.post("https://e-commerse-greenhaven.onrender.com/api/orders/place", order);
+            const response = await axios.post("http://localhost:5000/api/orders/place", order);
             if (response.data.success) {
                 setOrderDetails(order); // Store order details
                 setOrderSuccess(true); // Show the order success modal

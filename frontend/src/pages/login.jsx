@@ -16,26 +16,33 @@ function Login() {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    
+  e.preventDefault();
 
-    // axios.post("http://localhost:5000/api/auth/login", { email: emaili, password:password })
-      // For production, uncomment the following line:
-      axios.post("https://e-commerse-greenhaven.onrender.com/api/auth/login", { email: emaili, password })
-      .then(response => {
-        if (response.status === 200) {
-       
-          setLogin(true); // Set login state in context
-          setemail(emaili); // Set email in context
-          navigate("/"); // Redirect to homepage or dashboard
-          toast.success("Login successful");
+  axios
+    .post("http://localhost:5000/api/auth/login", { email: emaili, password })
+    .then(response => {
+      if (response.status === 200) {
+        const token = response.data.token;
+
+        if (token) {
+          localStorage.setItem("token", token); // ✅ Save token
+          console.log("Saved token:", token);
+        } else {
+          console.warn("No token received in response.");
         }
-      })
-      .catch(error => {
-        console.error("Login error:", error);
-        toast.warning("Invalid email or password");
-      });
-  };
+
+        setLogin(true);
+        setemail(emaili);
+        navigate("/");
+        toast.success("Login successful");
+      }
+    })
+    .catch(error => {
+      console.error("Login error:", error);
+      toast.warning("Invalid email or password");
+    });
+};
+
 
   return (
     <div className="login_container">

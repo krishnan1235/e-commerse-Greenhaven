@@ -24,8 +24,8 @@ function Createpage() {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get("https://e-commerse-greenhaven.onrender.com/api/v1/get");
-      // const res = await axios.get("http://localhost:5000/api/v1/get");
+      // const res = await axios.get("https://e-commerse-greenhaven.onrender.com/api/v1/get");
+      const res = await axios.get("http://localhost:5000/api/v1/get");
       setPro(res.data.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -61,13 +61,13 @@ function Createpage() {
 
       if (editingId) {
         console.log("Editing product with ID:", editingId);
-        // await axios.put(`http://localhost:5000/api/v1/update/${editingId}`, newproduct);
-        await axios.put(`https://e-commerse-greenhaven.onrender.com/api/v1/update/${editingId}`, newproduct);
+        await axios.put(`http://localhost:5000/api/v1/update/${editingId}`, newproduct);
+        // await axios.put(`https://e-commerse-greenhaven.onrender.com/api/v1/update/${editingId}`, newproduct);
         toast.success("Product updated successfully!");
         setEditingId(null);
       } else {
-        // await axios.post("http://localhost:5000/api/v1/add", newproduct);
-        await axios.post("https://e-commerse-greenhaven.onrender.com/api/v1/add", newproduct);
+        await axios.post("http://localhost:5000/api/v1/add", newproduct);
+        // await axios.post("https://e-commerse-greenhaven.onrender.com/api/v1/add", newproduct);
         toast.success("Product added successfully!");
       }
 
@@ -97,8 +97,8 @@ function Createpage() {
   const handleDelete = async (id) => {
     console.log("Deleting product with ID:", id); // Check if the ID is valid
     try {
-      // await axios.delete(`http://localhost:5000/api/v1/delete/${id}`);
-      await axios.delete(`https://e-commerse-greenhaven.onrender.com/api/v1/delete/${id}`);
+      await axios.delete(`http://localhost:5000/api/v1/delete/${id}`);
+      // await axios.delete(`https://e-commerse-greenhaven.onrender.com/api/v1/delete/${id}`);
       toast.success("Product deleted successfully!");
       fetchData();
     } catch (error) {

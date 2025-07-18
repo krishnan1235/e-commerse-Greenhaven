@@ -77,7 +77,7 @@
   transition: opacity 0.5s ease, transform 0.5s ease; 
 
   /* Ensures it's always on top */
-  z-index: 200000;  
+  z-index: 1000;  
 }
 
 
@@ -606,3 +606,11 @@
   }
 }
 
+.back-btn {
+  background-color: #a5d6a7;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}

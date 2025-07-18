@@ -1,5 +1,8 @@
 import User from "../models/users.model.js";
 import bcrypt from "bcryptjs"; 
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const registerUser = async (req, res) => {
   try {
@@ -36,64 +39,61 @@ export const registerUser = async (req, res) => {
 // Login
 // or require if using CommonJS
 
-export const login= async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(email,password)
-    // Check if email and password are provided
-    if (!email || !password) {
-      return res.status(400).json({ success: false, message: "Please provide email and password" });
-    }
 
-    // Find user in the database
     const user = await User.findOne({ email });
-  
-    if (!user) {
-      return res.status(404).json({ success: false, message: "User not found" });
-    }
-    // Compare provided password with hashed password
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    
-    if (!isPasswordValid) {
-      return res.status(401).json({ success: false, message: "Invalid email or password" });
-    }
-    user.isActive = true;
-    await user.save();
-  
+    if (!user) return res.status(404).json({ message: "User not found" });
 
-    res.status(200).json({ success: true, message: "Login successful" });
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) return res.status(401).json({ message: "Invalid credentials" });
+
+    const token = jwt.sign(
+      {
+        userId: user._id,
+        email: user.email,
+        isAdmin: user.email === "admin@green.com" // or user.isAdmin
+      },
+      process.env.JWT_SECRET,  // ✅ USE ENV
+      { expiresIn: "1h" }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Login successful",
+      token,
+      user
+    });
   } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json({ success: false, message: "Server error" });
+    res.status(500).json({ message: "Server error" });
   }
 };
 
+
+
 export const getuser = async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find(); // You can add `.select("-password")` to exclude password
     res.json(users);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
-
-
 // import User from "../models/user.model.js"; // adjust path if different
 
 export const getUser = async (req, res) => {
-    try {
-      const { email } = req.body;
-      const user = await User.findOne({ email });
-  
-      if (!user) {
-        return res.status(404).json({ message: "User not found" });
-      }
-  
-      res.status(200).json({ success: true, user });
-    } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
-  };
+  try {
+    const user = await User.findOne({ email: req.user.email });
+    if (!user)
+      return res.status(404).json({ message: "User not found" });
+
+    res.status(200).json({ success: true, user });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 
   export const updateUser = async (req, res) => {
     try {

@@ -42,8 +42,8 @@ function CatPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const res = await axios.get("http://localhost:5000/api/v1/get"); // Your product endpoint
-        const res = await axios.get("https://e-commerse-greenhaven.onrender.com/api/v1/get"); // Your product endpoint
+        const res = await axios.get("http://localhost:5000/api/v1/get"); // Your product endpoint
+        // const res = await axios.get("https://e-commerse-greenhaven.onrender.com/api/v1/get"); // Your product endpoint
         const allProducts = res.data.data;
         console.log(category)
         // If category is provided, filter products based on the category

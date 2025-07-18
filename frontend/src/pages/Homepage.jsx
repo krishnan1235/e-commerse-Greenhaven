@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 // import axios from 'axios';
 import axios from 'axios';
-
+import FloatingChatbot from './FloatingChatbot';
 import "./styles/cstyle.css";
 import { FaSearch } from "react-icons/fa";
 import ProductCard from './productcard';
+import { FaPlantWilt } from "react-icons/fa6";
 import Carousel from "./carousel";
 import Catagories from './catagery';
 
@@ -23,9 +24,9 @@ function Homepage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const res=await axios.get("http://localhost:5000/api/v1/get");
-     
-        const res = await axios.get("https://e-commerse-greenhaven.onrender.com/api/v1/get");
+        const res=await axios.get("http://localhost:5000/api/v1/get");
+
+        // const res = await axios.get("https://e-commerse-greenhaven.onrender.com/api/v1/get");
         setPro(res.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -39,11 +40,11 @@ function Homepage() {
   useEffect(() => {
     localStorage.setItem("searchElement", searchElement);
   }, [searchElement]);
-  
+
   useEffect(() => {
     const searchValue = searchElement.toLowerCase();
     setFilteredElements(
-      pro.filter((item) => 
+      pro.filter((item) =>
         item.name?.toLowerCase().includes(searchValue)
       )
     );
@@ -68,60 +69,66 @@ function Homepage() {
           <p className='lloading'>Loading products...</p>
         </div>
       ) : (
-      <>
-      <div className='search_bar2' id="search_bar_id2">
-          <div className="input_text2">
-            <input type="text" placeholder='search Plants' value={searchElement} onChange={(e)=> setSearchElement(e.target.value)} />
+        <>
+          <div className='search_bar2' id="search_bar_id2">
+            <div className="input_text2">
+              <input type="text" placeholder='search Plants' value={searchElement} onChange={(e) => setSearchElement(e.target.value)} />
+            </div>
+            <div className='search_button2'>
+              <button><FaSearch /></button>
+            </div>
           </div>
-          <div className='search_button2'>
-            <button><FaSearch /></button>
-          </div>
-      </div>
 
-      <div className="main">
-        {searchElement.length <= 0 ? (
-          <>
-            <Catagories />
-            <div className="carousel_container">
-              <Carousel />
-            </div>
-            <div className="intro">
-              <h2>Plants</h2>
-              <p>
-                Plants make for the best house companions, suitable for all your moods
-                and every aesthetic. Ugaoo brings you the widest variety of plants to
-                choose from so you can buy plants online from the comfort of your home!
-              </p>
-            </div>
-            <div className="grid-container">
-              {pro.map((item, index) => (
-                <div key={index} className="card_container" onClick={() => handleCardClick(item)}>
-                  <ProductCard products={item} />
+          <div className="main">
+            {searchElement.length <= 0 ? (
+              <>
+                <Catagories />
+                <div className="carousel_container">
+                  <Carousel />
                 </div>
-              ))}
-            </div>
-          </>
-        ) : (
-          <div className="grid-container">
-            <div className="contains">
-              <p className="home_tittle">Search Results</p>
-              {filteredElements.length === 0 ? (
-                <h1 className="home_res">No matching products found❗</h1>
-              ) : (
+                <div className="intro">
+                  <h2>Plants</h2>
+                  <p>
+                    Plants make for the best house companions, suitable for all your moods
+                    and every aesthetic. Ugaoo brings you the widest variety of plants to
+                    choose from so you can buy plants online from the comfort of your home!
+                  </p>
+                </div>
                 <div className="grid-container">
-                  {filteredElements.map((item, index) => (
+                  {pro.map((item, index) => (
                     <div key={index} className="card_container" onClick={() => handleCardClick(item)}>
                       <ProductCard products={item} />
                     </div>
                   ))}
                 </div>
-              )}
-            </div>
+              </>
+            ) : (
+              <div className="grid-container">
+                <div className="contains">
+                  <p className="home_tittle">Search Results</p>
+                  {filteredElements.length === 0 ? (
+                    <h1 className="home_res">No matching products found❗</h1>
+                  ) : (
+                    <div className="grid-container">
+                      {filteredElements.map((item, index) => (
+                        <div key={index} className="card_container" onClick={() => handleCardClick(item)}>
+                          <ProductCard products={item} />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      </>
+          <div style={{ textAlign: "center", margin: "30px" }}>
+            <Link to="/chatbot">
+              <button className="chatbot-button">🌱 Chat with Plant AI Assistant</button>
+            </Link>
+          </div>
+        </>
       )}
+      <FloatingChatbot />
     </>
   );
 }

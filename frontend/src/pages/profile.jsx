@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 
 
 const Profile = () => {
+  const token = localStorage.getItem("token");
   const { email, setemail } = useEmail();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("profile");
@@ -37,8 +38,8 @@ const Profile = () => {
     const fetchOrders = async () => {
       try {
         
-        const response = await axios.get("https://e-commerse-greenhaven.onrender.com/api/orders/emailget", {
-        // const response = await axios.get("http://localhost:5000/api/orders/emailget", {
+        // const response = await axios.get("https://e-commerse-greenhaven.onrender.com/api/orders/emailget", {
+        const response = await axios.get("http://localhost:5000/api/orders/emailget", {
           params: { email: email } // Pass the email or user ID here
         });
         setOrders(response.data.orders); // Assuming the response structure contains 'orders'
@@ -50,10 +51,15 @@ const Profile = () => {
     };
     const fetchUser = async () => {
       try {
-        const res = await axios.post("https://e-commerse-greenhaven.onrender.com/api/auth/getUser", {
-        // const res = await axios.post("http://localhost:5000/api/auth/getUser", {
-          email: email,
-        });
+        // const res = await axios.post("https://e-commerse-greenhaven.onrender.com/api/auth/getUser", {
+       const res = await axios.post("http://localhost:5000/api/auth/getUser", 
+      { email }, // or any required body
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // ✅ Add token here
+        }
+      }
+    );
   
         const fetchedUser = res.data.user;
         setUser({
@@ -106,8 +112,8 @@ const Profile = () => {
 
   const handleSaveProfile = async () => {
     try {
-      await axios.put("https://e-commerse-greenhaven.onrender.com/api/auth/updateUser", user, {
-      // await axios.put("http://localhost:5000/api/auth/updateUser", user, {
+      // await axios.put("https://e-commerse-greenhaven.onrender.com/api/auth/updateUser", user, {
+      await axios.put("http://localhost:5000/api/auth/updateUser", user, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`
         }
@@ -122,8 +128,8 @@ const Profile = () => {
   const handleLogout = async () => {
     console.log("Email at logout:", email); // add this
     try {
-      const response = await axios.post("https://e-commerse-greenhaven.onrender.com/api/auth/logout", {
-      // const response = await axios.post("http://localhost:5000/api/auth/logout", {
+      // const response = await axios.post("https://e-commerse-greenhaven.onrender.com/api/auth/logout", {
+      const response = await axios.post("http://localhost:5000/api/auth/logout", {
         email: email,
       });
       localStorage.removeItem("token");
@@ -151,8 +157,8 @@ const Profile = () => {
     }
   
     try {
-      await axios.put("https://e-commerse-greenhaven.onrender.com/api/auth/updateAddress", 
-      // await axios.put("http://localhost:5000/api/auth/updateAddress", 
+      // await axios.put("https://e-commerse-greenhaven.onrender.com/api/auth/updateAddress", 
+      await axios.put("http://localhost:5000/api/auth/updateAddress", 
         { 
           email, 
           address: JSON.stringify(address) // Convert object to string for storage
@@ -177,8 +183,8 @@ const Profile = () => {
 
     try {
       console.log(email,password.newPassword)
-      await axios.put("https://e-commerse-greenhaven.onrender.com/api/auth/updatePassword", 
-      // await axios.put("http://localhost:5000/api/auth/updatePassword", 
+      // await axios.put("https://e-commerse-greenhaven.onrender.com/api/auth/updatePassword", 
+      await axios.put("http://localhost:5000/api/auth/updatePassword", 
         { email: email, newPassword: password.newPassword }
       );
       toast.success("Password updated successfully ✅");

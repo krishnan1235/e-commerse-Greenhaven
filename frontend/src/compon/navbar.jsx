@@ -5,6 +5,8 @@ import "../index.css";
 import { useEmail } from "../emailcontext";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
+import { SiGooglegemini } from "react-icons/si";
+import { FaPlantWilt } from "react-icons/fa6";
 import { FaBars } from "react-icons/fa6";
 import { TiShoppingCart } from "react-icons/ti";
 import { CiUser } from "react-icons/ci";
@@ -111,6 +113,7 @@ function Navbar() {
             <button className='user' onClick={userAuth}><FaUserCircle />
             </button>
             <Link to={'/cart'}><FaCartShopping /></Link>
+              <Link to="/disease-predictor"><FaPlantWilt /></Link>
           </div>
         </div>
 

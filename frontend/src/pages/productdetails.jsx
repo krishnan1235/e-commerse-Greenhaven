@@ -49,8 +49,8 @@ const ProductDetails = () => {
             try {
                 setLoading(true);
                 const response = await axios.get(
-                    `https://e-commerse-greenhaven.onrender.com/api/v1/related/${encodeURIComponent(category)}`
-                    // `http://localhost:5000/api/v1/related/${encodeURIComponent(category)}`
+                    // `https://e-commerse-greenhaven.onrender.com/api/v1/related/${encodeURIComponent(category)}`
+                    `http://localhost:5000/api/v1/related/${encodeURIComponent(category)}`
                 );
 
                 // Handle the response properly
@@ -87,8 +87,8 @@ const ProductDetails = () => {
         }
 
         try {
-            const response = await axios.post("https://e-commerse-greenhaven.onrender.com/api/cart/add", {
-            // const response = await axios.post("http://localhost:5000/api/cart/add", {
+            // const response = await axios.post("https://e-commerse-greenhaven.onrender.com/api/cart/add", {
+            const response = await axios.post("http://localhost:5000/api/cart/add", {
                 email,
                 name,
                 price,
@@ -111,8 +111,8 @@ const ProductDetails = () => {
         }
 
         try {
-            const response = await axios.post("https://e-commerse-greenhaven.onrender.com/api/wishlist/add", {
-            // const response = await axios.post("http://localhost:5000/api/wishlist/add", {
+            // const response = await axios.post("https://e-commerse-greenhaven.onrender.com/api/wishlist/add", {
+            const response = await axios.post("http://localhost:5000/api/wishlist/add", {
                 email,
                 name,
                 price,
