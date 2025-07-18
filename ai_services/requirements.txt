@@ -1,0 +1,6 @@
+flask==3.1.1
+tensorflow==2.12.0  # Last stable version for most systems
+numpy
+pillow
+requests
+google-generativeai
