@@ -17,6 +17,85 @@ A comprehensive e-commerce platform for plants with integrated AI services for p
 
 The application follows a microservices architecture with three main components:
 
+### System Overview
+
+```mermaid
+graph TB
+    subgraph "Client Layer"
+        A[React Frontend<br/>:5173]
+    end
+
+    subgraph "API Gateway"
+        B[Express.js Backend<br/>:5000]
+    end
+
+    subgraph "AI Services"
+        C[Chatbot Service<br/>:5001]
+        D[Disease Detection<br/>:5002]
+    end
+
+    subgraph "External Services"
+        E[MongoDB Atlas]
+        F[Google Gemini AI]
+        G[PayPal API]
+    end
+
+    A --> B
+    B --> C
+    B --> D
+    B --> E
+    C --> F
+    C --> E
+    D --> E
+    A --> G
+
+    style A fill:#61dafb
+    style B fill:#68a063
+    style C fill:#306998
+    style D fill:#306998
+    style E fill:#4db33d
+    style F fill:#4285f4
+    style G fill:#003087
+```
+
+### Component Architecture
+
+```mermaid
+graph LR
+    subgraph "Frontend Components"
+        A1[Pages]
+        A2[Components]
+        A3[Store/Context]
+        A4[Styles]
+    end
+
+    subgraph "Backend Services"
+        B1[Controllers]
+        B2[Models]
+        B3[Routes]
+        B4[Middleware]
+    end
+
+    subgraph "AI Services"
+        C1[Chatbot Flask App]
+        C2[Disease Detection Flask App]
+        C3[ML Models]
+        C4[Image Processing]
+    end
+
+    A1 --> B3
+    A2 --> B3
+    A3 --> B3
+    B3 --> B1
+    B1 --> B2
+    B4 --> B1
+    B1 --> C1
+    B1 --> C2
+    C1 --> C3
+    C2 --> C3
+    C2 --> C4
+```
+
 ### 1. Frontend (React + Vite)
 
 - **Framework**: React 18 with Vite for fast development
@@ -138,6 +217,30 @@ MONGO_URI=your_mongodb_connection_string
 
 ## 🏃‍♂️ Running the Application
 
+### Service Dependencies
+
+```mermaid
+graph TD
+    A[Start MongoDB] --> B[Start Backend Server]
+    B --> C[Start AI Services]
+    C --> D[Start Frontend]
+
+    E[AI Chatbot Service] --> F[Google Gemini API]
+    E --> G[MongoDB Connection]
+
+    H[Disease Detection] --> I[Load ML Models]
+    H --> J[Image Processing Ready]
+
+    K[Backend Server] --> L[JWT Authentication]
+    K --> M[Database Models]
+    K --> N[API Routes]
+
+    style A fill:#4db33d
+    style B fill:#68a063
+    style C fill:#306998
+    style D fill:#61dafb
+```
+
 ### Start all services:
 
 1. **Frontend Development Server**
@@ -205,6 +308,88 @@ e-commerse-Greenhaven/
 
 ## 🔑 Key Features Explained
 
+### User Journey Flow
+
+```mermaid
+flowchart TD
+    A[User Visits Website] --> B{User Registered?}
+    B -->|No| C[Sign Up]
+    B -->|Yes| D[Login]
+    C --> E[Browse Products]
+    D --> E
+    E --> F[Search/Filter Plants]
+    F --> G[View Product Details]
+    G --> H{Add to Cart?}
+    H -->|Yes| I[Add to Cart]
+    H -->|No| J[Add to Wishlist]
+    I --> K[View Cart]
+    J --> E
+    K --> L[Proceed to Checkout]
+    L --> M[PayPal Payment]
+    M --> N[Order Confirmation]
+    N --> O[Order Tracking]
+
+    subgraph "AI Features"
+        P[Disease Detection]
+        Q[Plant Chatbot]
+    end
+
+    E --> P
+    E --> Q
+    P --> R[Upload Plant Image]
+    Q --> S[Ask Plant Questions]
+    R --> T[Get Disease Diagnosis]
+    S --> U[Get Plant Recommendations]
+
+    style A fill:#e1f5fe
+    style E fill:#f3e5f5
+    style P fill:#fff3e0
+    style Q fill:#fff3e0
+```
+
+### AI Service Architecture
+
+```mermaid
+graph TB
+    subgraph "AI Router (Flask :5001)"
+        A[Main AI App]
+        A --> B[Chatbot Routes]
+        A --> C[Disease Routes]
+    end
+
+    subgraph "Chatbot Service (:5001)"
+        D[Chat Handler]
+        D --> E[Google Gemini AI]
+        D --> F[MongoDB Product DB]
+        D --> G[Climate Data]
+    end
+
+    subgraph "Disease Detection (:5002)"
+        H[Image Handler]
+        H --> I[Image Preprocessing]
+        I --> J[CNN Model]
+        J --> K[Prediction Results]
+    end
+
+    subgraph "ML Models"
+        L[Plant Disease Model.h5]
+        M[Class Labels JSON]
+        N[City Climate Data]
+    end
+
+    B --> D
+    C --> H
+    J --> L
+    J --> M
+    G --> N
+
+    style A fill:#306998
+    style D fill:#4caf50
+    style H fill:#ff9800
+    style E fill:#4285f4
+    style L fill:#9c27b0
+```
+
 ### 1. E-commerce Functionality
 
 - **Product Catalog**: Browse plants by categories (Indoor, Outdoor, Medicinal, etc.)
@@ -239,6 +424,55 @@ e-commerse-Greenhaven/
 - **Multiple Payment Options**: Support for various payment methods
 
 ## 🎯 API Endpoints
+
+### API Flow Diagram
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant F as Frontend
+    participant B as Backend
+    participant AI as AI Services
+    participant DB as MongoDB
+    participant G as Gemini AI
+
+    Note over U,G: User Authentication Flow
+    U->>F: Login Request
+    F->>B: POST /api/auth/login
+    B->>DB: Verify Credentials
+    DB-->>B: User Data
+    B-->>F: JWT Token
+    F-->>U: Login Success
+
+    Note over U,G: Product Management Flow
+    U->>F: View Products
+    F->>B: GET /api/v1/get
+    B->>DB: Fetch Products
+    DB-->>B: Product Data
+    B-->>F: Products JSON
+    F-->>U: Display Products
+
+    Note over U,G: AI Chatbot Flow
+    U->>F: Ask Plant Question
+    F->>B: POST /api/ai/chatbot
+    B->>AI: Forward Request
+    AI->>G: Query Gemini AI
+    G-->>AI: AI Response
+    AI->>DB: Query Product Data
+    DB-->>AI: Product Info
+    AI-->>B: Combined Response
+    B-->>F: Chat Response
+    F-->>U: Display Answer
+
+    Note over U,G: Disease Detection Flow
+    U->>F: Upload Plant Image
+    F->>B: POST /api/ai/disease
+    B->>AI: Forward Image
+    AI->>AI: Process with ML Model
+    AI-->>B: Disease Prediction
+    B-->>F: Prediction Result
+    F-->>U: Show Diagnosis
+```
 
 ### Products
 
@@ -286,21 +520,97 @@ e-commerse-Greenhaven/
 
 ## 📊 Database Schema
 
-### Products
+### Entity Relationship Diagram
+
+```mermaid
+erDiagram
+    USERS {
+        ObjectId _id PK
+        String name
+        String lastName
+        String email UK
+        String phone
+        String password
+        Date birthdate
+        String gender
+        Boolean isAdmin
+        Boolean isActive
+        String address
+        Date createdAt
+        Date updatedAt
+    }
+
+    PRODUCTS {
+        ObjectId _id PK
+        String name
+        String brand
+        String category
+        String description
+        Number price
+        Number selling
+        String image
+        Number stocks
+        Date createdAt
+        Date updatedAt
+    }
+
+    ORDERS {
+        ObjectId _id PK
+        String orderId UK
+        String userEmail FK
+        String productId FK
+        String productName
+        String productImage
+        Number price
+        String paymentMode
+        String status
+        Date createdAt
+    }
+
+    CART {
+        ObjectId _id PK
+        String email FK
+        Array items
+        Date createdAt
+        Date updatedAt
+    }
+
+    WISHLIST {
+        ObjectId _id PK
+        String email FK
+        String name
+        Number price
+        String image
+        Date createdAt
+    }
+
+    USERS ||--o{ ORDERS : "places"
+    USERS ||--o{ CART : "has"
+    USERS ||--o{ WISHLIST : "maintains"
+    PRODUCTS ||--o{ ORDERS : "contains"
+```
+
+### Database Collections
+
+#### Products
 
 - name, brand, category, description, price, image, stocks, selling status
 
-### Users
+#### Users
 
 - name, email, password, phone, address, orders, authentication status
 
-### Orders
+#### Orders
 
 - orderId, userEmail, productInfo, price, paymentMode, status, timestamps
 
-### Cart Items
+#### Cart Items
 
 - email, items (name, price, image, quantity)
+
+#### Wishlist Items
+
+- email, name, price, image, timestamps
 
 ## 🚦 Development Guidelines
 
@@ -335,6 +645,57 @@ e-commerse-Greenhaven/
 
 ## 🔧 Deployment
 
+### Deployment Architecture
+
+```mermaid
+graph TB
+    subgraph "Production Environment"
+        subgraph "Frontend (Vercel/Netlify)"
+            A[React Build<br/>Static Files]
+            B[CDN Distribution]
+        end
+
+        subgraph "Backend (Railway/Heroku)"
+            C[Express.js Server]
+            D[Environment Variables]
+            E[API Routes]
+        end
+
+        subgraph "AI Services (Python Cloud)"
+            F[Flask Chatbot Service]
+            G[Flask Disease Detection]
+            H[ML Models Storage]
+        end
+
+        subgraph "Database & External Services"
+            I[MongoDB Atlas]
+            J[Google Gemini AI]
+            K[PayPal API]
+        end
+    end
+
+    A --> B
+    B --> C
+    C --> D
+    C --> E
+    E --> F
+    E --> G
+    F --> H
+    G --> H
+    C --> I
+    F --> J
+    F --> I
+    A --> K
+
+    style A fill:#61dafb
+    style C fill:#68a063
+    style F fill:#306998
+    style G fill:#306998
+    style I fill:#4db33d
+```
+
+### Deployment Steps
+
 ### Frontend Deployment (Vercel/Netlify)
 
 ```bash
@@ -358,7 +719,12 @@ cd ai_services
 # Deploy to cloud platform with Python support
 ```
 
-## 📞 Support & Contributing
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
 
 ### Issues
 
